@@ -1,36 +1,31 @@
 # Documentation Index
 
-This folder contains the actively maintained documentation. Historical or legacy notes live in `Book/` at the repo root.
+This folder contains the actively maintained user-facing and implementation-facing documentation. Core runtime background notes that overlap with these topics live in `Book/` at the repo root.
 
 ## Core Docs
 - `SYNTAX.md`: Supported language syntax and semantics (Python-like subset).
 - `INTERPRETER.md`: Interpreter (AST REPL) usage and behavior.
-- `PLAN.md`: Current development plan and milestones.
+- `INTERPRETER_AST_SUBSET.md`: Current capability matrix for the AST interpreter.
+- `compiler.md`: Python frontend to C++ codegen pipeline notes.
 
-## Runtime & Compiler
+## Runtime, Loading, And FFI
 - `Runtime.md`: Runtime overview.
-- `runtime_value_docs.md`: Runtime value model.
-- `runtime_value_system_docs.md`: Runtime value system design.
-- `object_system_docs.md`: Object system notes.
-- `container_system_docs.md`: Container system notes.
-- `compiler.md`: Compiler pipeline notes.
-
-## REPL & Tooling
-- `MC_AST_REPL.md`: AST REPL design/usage.
-- `MC_Native_REPL.md`: Native REPL notes.
-- `MC_REPL_Design.md`: REPL design ideas.
-- `MC_REPL_UserFunctions.md`: User function handling.
-
-## Extensions & FFI
-- `C_EXT.md`: C extension notes.
-- `new_c_ext.md`, `new_c_ext_2.md`: Experimental C extension notes.
-- `new_ffi.md`: FFI experiment notes.
-- `FFI.md` is in `Book/` (legacy).
-
-## Python & Class Notes
+- `LibLoader.md`: Dynamic library/module loading notes.
+- `C_EXT.md`: Python C extension notes for `case_ext.cc`.
 - `PythonCE.md`: Python C-API notes.
-- `HowToUserClass.md`, `UseClass.md`, `UserClassDone-1.md`, `UserClassDone-2.md`, `UserClassDone-3.md`: User class experiments.
+
+## Class Support
+- `class_syntax_scope.md`: Current class syntax subset and type-checking scope.
+- `HowToUserClass.md`: Detailed class lowering design and implementation notes.
+
+## Older Background Notes In `Book/`
+- `Book/Object.md`: Runtime object model.
+- `Book/Value.md`: Runtime value system.
+- `Book/Container.md`: Runtime container system.
+- `Book/Ast.md`: AST/IR structure.
+- `Book/Function.md`: Function system.
+- `Book/Visitor.md`: Visitor infrastructure.
+- `Book/FFI.md`: FFI architecture background.
 
 ## Other
-- `LibLoader.md`: Library loader notes.
 - `序章.md`: Early project notes (Chinese).
