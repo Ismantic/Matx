@@ -1,64 +1,69 @@
 # Matx
 
-Matx is an experimental compiler/runtime project with three main pieces:
+Matx is an experimental compiler/runtime project for a small Python-like language. It combines a C++17 runtime, AST rewriting/code generation, dynamic module loading, and a Python-side prototype compiler.
 
-- a C++17 runtime and AST/rewriter pipeline in `src/`
-- native test and REPL applications in `apps/`
-- a Python-side FFI/compiler prototype in `python/`
+This repository is best read as a working compiler playground, not a full language implementation.
 
-The repository currently focuses on direct AST construction, code generation to C++, dynamic module loading, and a small Python-like interpreter subset.
+## Highlights
 
-## Repository Layout
+- C++ runtime with value/object/container support
+- AST construction, rewriting, and C++ code generation
+- Native interpreter / REPL for a Python-like subset
+- Python frontend that lowers restricted Python into generated C++
+- Dynamic loading of generated shared libraries
 
-```text
-.
-├── CMakeLists.txt
-├── apps/          # native test drivers and REPL binaries
-├── src/           # runtime, AST, parser, rewriter, FFI support
-├── python/        # Python parser/compiler/FFI experiments
-├── docs/          # design notes and usage docs
-└── Book/          # object model and runtime notes
-```
+## Current Scope
 
-## Build
+Matx currently supports a constrained subset rather than full Python.
 
-From the repository root:
+- values: `int`, `float`, `bool`, `str`, `None`
+- containers: `list`, `dict`, `set`
+- expressions: arithmetic, comparison, boolean ops, indexing
+- control flow: `if/else`, `while`, `for ... in range(...)`
+- functions: basic typed parameters/returns
+- classes: partial lowering for constructors, fields, and instance methods
+
+One important semantic difference: integer `/` is treated as integer division in the native interpreter subset.
+
+## Quick Start
+
+Build from the repository root:
 
 ```bash
 cmake -S . -B build
 cmake --build build
 ```
 
-Main native test:
+Run the main native test binary:
 
 ```bash
 LD_LIBRARY_PATH=build ./build/apps/test
 ```
 
-Native AST interpreter:
+Run the AST interpreter:
 
 ```bash
 ./build/apps/interpreter_ast
 ./build/apps/interpreter_ast path/to/script.mx
 ```
 
-## Python Pipeline
+## Python Prototype
 
-The Python prototype compiles a restricted Python subset into generated C++, builds a shared object, then loads it through the native runtime.
+The Python pipeline parses a restricted subset, lowers it into Matx IR, emits C++, builds a shared object, and loads it back through the runtime.
 
-Build the C++ runtime first, then build the Python extension:
+Build the extension after the C++ runtime:
 
 ```bash
 g++ -shared -fPIC case_ext.cc -I/usr/include/python3.14 -I. -Lbuild -lcase -o case_ext.so
 ```
 
-Run the main pipeline:
+Run the prototype entry:
 
 ```bash
 python3 -u python/new_ffi.py
 ```
 
-Targeted Python checks:
+Useful regression scripts:
 
 ```bash
 python3 -u python/run_if_test.py
@@ -67,30 +72,34 @@ python3 -u python/run_container_test.py
 python3 -u python/run_types_test.py
 python3 -u python/run_type_error_test.py
 python3 -u python/run_range_neg_test.py
+python3 -u python/run_class_test.py
 ```
 
-If runtime loading fails, confirm these artifacts exist:
+If dynamic loading fails, check:
 
 - `build/libcase.so`
 - `case_ext.so`
 
-## Language Notes
+## Repository Layout
 
-The interpreter and Python frontend are intentionally limited. Current support includes:
+```text
+.
+├── src/      # runtime, AST, parser, rewriter, C API
+├── apps/     # native test binaries and interpreters
+├── python/   # Python frontend and FFI/compiler experiments
+├── docs/     # active documentation
+└── Book/     # older design and runtime notes
+```
 
-- integers, floats, bools, strings, and `None`
-- list/dict/set literals
-- indexing and indexed assignment
-- arithmetic and comparison expressions
-- boolean operators
-- `if/else`, `while`, and `for ... in range(...)`
-- user functions and parts of user-defined class lowering
+## Status
 
-This is a Python-like language, not full Python. For example, integer `/` is integer division in the native interpreter subset.
+The project is under active experimentation. Interfaces, supported syntax, and internal structure may change as the compiler/runtime model evolves.
 
 ## Documentation
 
 - [docs/README.md](docs/README.md)
-- [docs/INTERPRETER.md](docs/INTERPRETER.md)
 - [docs/SYNTAX.md](docs/SYNTAX.md)
+- [docs/INTERPRETER.md](docs/INTERPRETER.md)
+- [docs/compiler.md](docs/compiler.md)
+- [python/CLASS_SUBSET.md](python/CLASS_SUBSET.md)
 - [python/RELEASE_CHECKLIST.md](python/RELEASE_CHECKLIST.md)
