@@ -26,6 +26,3 @@ This folder contains the actively maintained user-facing and implementation-faci
 - `Book/Function.md`: Function system.
 - `Book/Visitor.md`: Visitor infrastructure.
 - `Book/FFI.md`: FFI architecture background.
-
-## Other
-- `序章.md`: Early project notes (Chinese).
