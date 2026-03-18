@@ -1,0 +1,10 @@
+function(build_apps SRCFILE)
+    get_filename_component(src_name ${SRCFILE} NAME_WE)
+    set(target "${src_name}")
+    add_executable(${target} ${SRCFILE})
+    target_link_libraries(${target} PRIVATE case)
+endfunction(build_apps)
+
+build_apps(test.cc)
+build_apps(interpreter.cc)
+build_apps(interpreter_ast.cc)

@@ -1,0 +1,22 @@
+
+target_sources(
+  case 
+  PRIVATE 
+  ${CMAKE_CURRENT_SOURCE_DIR}/datatype.cc
+  ${CMAKE_CURRENT_SOURCE_DIR}/array.cc
+  ${CMAKE_CURRENT_SOURCE_DIR}/map.cc
+  ${CMAKE_CURRENT_SOURCE_DIR}/str.cc
+  ${CMAKE_CURRENT_SOURCE_DIR}/container.cc
+  ${CMAKE_CURRENT_SOURCE_DIR}/runtime_value.cc
+  ${CMAKE_CURRENT_SOURCE_DIR}/runtime_module.cc
+  ${CMAKE_CURRENT_SOURCE_DIR}/object.cc
+  ${CMAKE_CURRENT_SOURCE_DIR}/expression.cc
+  ${CMAKE_CURRENT_SOURCE_DIR}/statement.cc
+  ${CMAKE_CURRENT_SOURCE_DIR}/ops.cc
+  ${CMAKE_CURRENT_SOURCE_DIR}/function.cc
+  ${CMAKE_CURRENT_SOURCE_DIR}/printer.cc
+  ${CMAKE_CURRENT_SOURCE_DIR}/visitor.cc
+  ${CMAKE_CURRENT_SOURCE_DIR}/rewriter.cc
+  ${CMAKE_CURRENT_SOURCE_DIR}/parser.cc
+  ${CMAKE_CURRENT_SOURCE_DIR}/c_api.cc
+)
